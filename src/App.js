@@ -1,7 +1,7 @@
 import React from "react";
 import {
 	Route,
-	HashRouter,
+	BrowserRouter,
 	Routes as Switch,
 } from "react-router-dom/dist/index.js";
 import "./App.css";
@@ -16,7 +16,7 @@ import {
 
 function App() {
 	return (
-		<HashRouter basename={process.env.PUBLIC_URL}>
+		<BrowserRouter basename={process.env.PUBLIC_URL}>
 			<Navbar />
 			<Switch>
 				<Route path="/" exact element={<Home />}></Route>
@@ -33,7 +33,7 @@ function App() {
 				></Route>
 				<Route path="/prof-page" exact element={<ProfPage />}></Route>
 			</Switch>
-		</HashRouter>
+		</BrowserRouter>
 	);
 }
 
