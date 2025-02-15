@@ -1,8 +1,7 @@
 import React from "react";
 import {
-	Route,
-	BrowserRouter,
-	Routes as Switch,
+	createHashRouter,
+	RouterProvider,
 } from "react-router-dom/dist/index.js";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -15,26 +14,35 @@ import {
 } from "./components/pages/index.js";
 
 function App() {
-	return (
-		<BrowserRouter basename={process.env.PUBLIC_URL}>
+	const navBarWrapper = (page) => (
+		<>
 			<Navbar />
-			<Switch>
-				<Route path="/" exact element={<Home />}></Route>
-				<Route path="/sign-in" exact element={<SignIn />}></Route>
-				<Route
-					path="/student"
-					exact
-					element={<StudentSignIn />}
-				></Route>
-				<Route
-					path="/prof-sign-in"
-					exact
-					element={<ProfSignIn />}
-				></Route>
-				<Route path="/prof-page" exact element={<ProfPage />}></Route>
-			</Switch>
-		</BrowserRouter>
+			{page}
+		</>
 	);
+	const router = createHashRouter([
+		{
+			path: "/",
+			element: navBarWrapper(<Home />),
+		},
+		{
+			path: "sign-in",
+			element: navBarWrapper(<SignIn />),
+		},
+		{
+			path: "student",
+			element: navBarWrapper(<StudentSignIn />),
+		},
+		{
+			path: "prof-sign-in",
+			element: navBarWrapper(<ProfSignIn />),
+		},
+		{
+			path: "prof-page",
+			element: navBarWrapper(<ProfPage />),
+		},
+	]);
+	return <RouterProvider router={router} />;
 }
 
 export default App;
